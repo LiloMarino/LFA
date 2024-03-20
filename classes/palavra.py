@@ -37,6 +37,18 @@ class Palavra:
         else:
             raise TypeError("Só é permitido a concatenação entre palavras e símbolos!")
 
+    def __radd__(self, other: object) -> "Palavra":
+        if isinstance(other, str):
+            return Palavra(self.alfabeto, self.palavra + other)
+        else:
+            raise TypeError("Só é permitido a concatenação entre palavras e símbolos!")
+
+    def __pow__(self, value: int) -> "Palavra":
+        if len(self.palavra) > 0 or value > 0:
+            return Palavra(self.alfabeto, self.palavra * value)
+        else:
+            raise ZeroDivisionError("Não é possível elevar uma palavra vazia ao zero.")
+
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Palavra):
             return self.palavra == other.palavra
