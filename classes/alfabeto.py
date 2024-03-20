@@ -1,4 +1,5 @@
 from collections import abc
+from typing import Generator
 
 
 class Alfabeto(abc.Set):
@@ -21,6 +22,16 @@ class Alfabeto(abc.Set):
             self.simbolos = set(simbolos)
         else:
             raise TypeError("Símbolos deve ser um conjunto ou uma string")
+
+    @property
+    def simbolos_ordenados(self) -> list:
+        """
+        Retorna uma lista ordenada dos símbolos
+
+        Returns:
+            list: Retorna uma lista ordenada dos símbolos
+        """
+        return sorted(self.simbolos)
 
     def add_simbolo(self, simbolo: str) -> None:
         """
@@ -50,6 +61,78 @@ class Alfabeto(abc.Set):
         self.simbolos.discard(simbolo)
         return True if simbolo in self.simbolos else False
 
+    def frt(self, max_depth: int = -1) -> Generator:
+        """
+        Gera os elementos do Fechamento Recursivo e Transitivo do Alfabeto
+
+        Args:
+            max_depth (int, optional): Profundidade máxima de recursão. Se negativo, é infinito. Defaults to -1.
+
+        Yields:
+            Palavra: Retorna a próxima cadeia do fechamento
+        """
+        from classes.palavra import Palavra
+
+        def generate_depth(n: int):
+            # Gera todas as palavras de tamanho 'n'
+            def generate_character(posicao: int, palavra: Palavra = Palavra(self)):
+                # Gera o caractere na posição da cadeia
+                if posicao == 0:
+                    yield palavra
+                else:
+                    for simbolo in self.simbolos_ordenados:
+                        # Para cada símbolo na posição
+                        yield from generate_character(posicao - 1, palavra + simbolo)
+
+            yield from generate_character(n)
+
+        if max_depth > -1:
+            # Se max_depth for especificado, gere até o tamanho max_depth
+            for i in range(max_depth):
+                yield from generate_depth(i)
+        else:
+            # Caso contrário, gere infinitamente
+            i = 0
+            while True:
+                yield from generate_depth(i)
+                i += 1
+
+    def fr(self, max_depth: int = -1) -> Generator:
+        """
+        Gera os elementos do Fechamento Recursivo do Alfabeto
+
+        Args:
+            max_depth (int, optional): Profundidade máxima de recursão. Se negativo, é infinito. Defaults to -1.
+
+        Yields:
+            Palavra: Retorna a próxima cadeia do fechamento
+        """
+        from classes.palavra import Palavra
+
+        def generate_depth(n: int):
+            # Gera todas as palavras de tamanho 'n'
+            def generate_character(posicao: int, palavra: Palavra = Palavra(self)):
+                # Gera o caractere na posição da cadeia
+                if posicao == 0:
+                    yield palavra
+                else:
+                    for simbolo in self.simbolos_ordenados:
+                        # Para cada símbolo na posição
+                        yield from generate_character(posicao - 1, palavra + simbolo)
+
+            yield from generate_character(n)
+
+        if max_depth > -1:
+            # Se max_depth for especificado, gere até o tamanho max_depth
+            for i in range(max_depth):
+                yield from generate_depth(i + 1)
+        else:
+            # Caso contrário, gere infinitamente
+            i = 0
+            while True:
+                yield from generate_depth(i)
+                i += 1
+
     # Métodos Mágicos
 
     def __contains__(self, x: object) -> bool:
@@ -67,7 +150,7 @@ class Alfabeto(abc.Set):
         return TypeError("É possível comparar apenas entre alfabetos")
 
     def __str__(self) -> str:
-        return f"Σ = {self.simbolos.__str__()}"
+        return f"Σ = {self.simbolos_ordenados}"
 
     def __repr__(self) -> str:
-        return f"Alfabeto(simbolos = {self.simbolos})"
+        return f"Alfabeto(simbolos = {self.simbolos_ordenados})"
