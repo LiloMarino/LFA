@@ -31,14 +31,11 @@ class Alfabeto(abc.Set):
 
         Raises:
             TypeError: Caso o símbolo não seja um caractere
-            ValueError: Caso o símbolo seja mais de um caracter ou nenhum
         """
-        if not isinstance(simbolo, str):
-            raise TypeError("Simbolo deve ser uma string")
-        elif len(simbolo) != 1:
-            raise ValueError("O símbolo deve ser uma letra única")
-        else:
+        if isinstance(simbolo, str):
             self.simbolos.add(simbolo)
+        else:
+            raise TypeError("Simbolo deve ser uma string")
 
     def discard_simbolo(self, simbolo: str) -> bool:
         """
@@ -63,3 +60,14 @@ class Alfabeto(abc.Set):
 
     def __len__(self) -> int:
         return self.simbolos.__len__()
+
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Alfabeto):
+            return self.simbolos == other.simbolos
+        return TypeError("É possível comparar apenas entre alfabetos")
+
+    def __str__(self) -> str:
+        return f"Σ = {self.simbolos.__str__()}"
+
+    def __repr__(self) -> str:
+        return f"Alfabeto(simbolos = {self.simbolos})"
