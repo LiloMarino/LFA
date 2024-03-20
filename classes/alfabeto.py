@@ -63,3 +63,14 @@ class Alfabeto(abc.Set):
 
     def __len__(self) -> int:
         return self.simbolos.__len__()
+
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Alfabeto):
+            return self.simbolos == other.simbolos
+        return TypeError("É possível comparar apenas entre alfabetos")
+
+    def __str__(self) -> str:
+        return f"Σ = {self.simbolos.__str__()}"
+
+    def __repr__(self) -> str:
+        return f"Alfabeto(simbolos = {self.simbolos})"
