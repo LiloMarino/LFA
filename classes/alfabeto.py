@@ -31,14 +31,11 @@ class Alfabeto(abc.Set):
 
         Raises:
             TypeError: Caso o símbolo não seja um caractere
-            ValueError: Caso o símbolo seja mais de um caracter ou nenhum
         """
-        if not isinstance(simbolo, str):
-            raise TypeError("Simbolo deve ser uma string")
-        elif len(simbolo) != 1:
-            raise ValueError("O símbolo deve ser uma letra única")
-        else:
+        if isinstance(simbolo, str):
             self.simbolos.add(simbolo)
+        else:
+            raise TypeError("Simbolo deve ser uma string")
 
     def discard_simbolo(self, simbolo: str) -> bool:
         """
