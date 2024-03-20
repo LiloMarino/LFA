@@ -37,12 +37,17 @@ class Palavra:
         else:
             raise TypeError("Só é permitido a concatenação entre palavras e símbolos!")
 
-    def __eq__(self, __value: object) -> bool:
-        return isinstance(__value, Palavra) and self.palavra == __value
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Palavra):
+            return self.palavra == other.palavra
+        elif isinstance(other, str):
+            return self.palavra == other
+        else:
+            return False
 
     def __str__(self) -> str:
         if len(self.palavra) == 0:
-            return "λ"
+            return "'λ'"
         else:
             return f"'{self.palavra}'"
 
