@@ -1,10 +1,20 @@
 class Producao:
     def __init__(self, origem: str, produto: str) -> None:
+        """
+        Instancia uma Produção
+
+        Args:
+            origem (str): Origem da produção.
+            produto (str): Resultado da produção
+
+        Raises:
+            TypeError: Caso os argumentos não sejam do tipo correto.
+        """
         if isinstance(origem, str) and isinstance(produto, str):
             self.origem = origem
             self.produto = produto
         else:
-            raise ValueError("Origem e Produto devem ser strings")
+            raise TypeError("Origem e Produto devem ser strings")
 
     # Métodos Mágicos
 
