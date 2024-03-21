@@ -26,6 +26,8 @@ class Gramatica:
         self.sintaxe = sintaxe
         self.simbolo_inicial = simbolo_inicial
 
+    # Métodos Mágicos
+
     def __str__(self) -> str:
         return f"G = ({self.vocabulario}, {self.alfabeto}, {self.sintaxe}, S = {self.simbolo_inicial} )"
 
