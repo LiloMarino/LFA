@@ -3,7 +3,7 @@ from classes.sintaxe import Sintaxe
 from classes.vocabulario import Vocabulario
 
 
-class Linguagem:
+class Gramatica:
     def __init__(
         self,
         vocabulario: Vocabulario,
@@ -21,3 +21,18 @@ class Linguagem:
         assert (
             isinstance(simbolo_inicial, str) and len(simbolo_inicial) == 1
         ), "simbolo_inicial deve ser uma string com um único caractere"
+        self.alfabeto = alfabeto
+        self.vocabulario = vocabulario
+        self.sintaxe = sintaxe
+        self.simbolo_inicial = simbolo_inicial
+
+    def __str__(self) -> str:
+        return f"G = ({self.vocabulario}, {self.alfabeto}, {self.sintaxe}, S = {self.simbolo_inicial} )"
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}(vocabulario={repr(self.vocabulario)}, "
+            f"alfabeto={repr(self.alfabeto)}, "
+            f"sintaxe={repr(self.sintaxe)}, "
+            f'simbolo_inicial="{repr(self.simbolo_inicial)}")'
+        )
