@@ -45,7 +45,7 @@ class Sintaxe(abc.MutableMapping):
 
     # Métodos Mágicos
     def __str__(self) -> str:
-        return str([str(producao) for producao in self.__producoes])
+        return f"P = {self.__producoes}"
 
     def __repr__(self) -> str:
         return f"Sintaxe(produções = {self.__producoes})"
