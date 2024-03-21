@@ -3,7 +3,7 @@ from typing import Generator
 
 
 class Alfabeto(abc.Set):
-    def __init__(self, simbolos: set[str]) -> None:
+    def __init__(self, simbolos: set[str] | str) -> None:
         """
         Instancia um Alfabeto
 
