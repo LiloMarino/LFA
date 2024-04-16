@@ -4,7 +4,7 @@ from classes.alfabeto import Alfabeto
 class Palavra:
     def __init__(self, alfabeto: Alfabeto, palavra: str = "") -> None:
         """
-        Instancia uma Palavra
+        Inicia uma Palavra
 
         Args:
             alfabeto (Alfabeto): Alfabeto usado na construção da palavra

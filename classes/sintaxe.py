@@ -7,7 +7,7 @@ class Sintaxe(abc.MutableMapping):
 
     def __init__(self, prod: dict[str, list[str]] | list[Producao] | Producao) -> None:
         """
-        Instancia uma Sintaxe
+        Inicia uma Sintaxe
 
         Args:
             prod (dict[str, str] | list[Producao] | Producao): Um dicionário
@@ -34,14 +34,16 @@ class Sintaxe(abc.MutableMapping):
             for key, value in prod.items():
                 assert isinstance(key, str) and isinstance(
                     value, list
-                ), f"Chaves e valores devem ser strings; '{type(key).__name__}' e '{type(value).__name__}' encontrados."
+                ), f"Chave deve ser string e valor deve ser list; '{type(key).__name__}' e '{type(value).__name__}' encontrados."
                 for i in value:
                     assert isinstance(
                         i, str
                     ), "Os valores do dicionário devem ser strings."
             self.__producoes = prod
         else:
-            raise TypeError(f"Tipo de argumento inválido: {prod}")
+            raise TypeError(
+                f"Argumento inválido! Esperado um 'dict', 'list' ou 'Producao', recebido {type(prod).__name__}"
+            )
 
     # Métodos Mágicos
     def __str__(self) -> str:

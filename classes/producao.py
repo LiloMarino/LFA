@@ -1,7 +1,7 @@
 class Producao:
     def __init__(self, origem: str, produto: str) -> None:
         """
-        Instancia uma Produção
+        Inicia uma Produção
 
         Args:
             origem (str): Origem da produção.
