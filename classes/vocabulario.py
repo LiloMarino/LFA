@@ -3,7 +3,7 @@ from collections import abc
 from classes.alfabeto import Alfabeto
 
 
-class Vocabulario(abc.Set):
+class Vocabulario(abc.MutableSet):
     def __init__(
         self, simbolos_n_terminais: set[str] | str, alfabeto: Alfabeto
     ) -> None:

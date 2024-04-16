@@ -2,7 +2,7 @@ from collections import abc
 from typing import Generator
 
 
-class Alfabeto(abc.Set):
+class Alfabeto(abc.MutableSet):
     def __init__(self, simbolos: set[str] | str) -> None:
         """
         Instancia um Alfabeto
