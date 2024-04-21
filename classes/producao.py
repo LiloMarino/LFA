@@ -27,4 +27,4 @@ class Producao:
         return f"{self.origem} -> {self.produto}"
 
     def __repr__(self) -> str:
-        return f"Producao(origem = {self.origem},  produto={self.produto})"
+        return str(self)

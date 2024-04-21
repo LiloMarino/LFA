@@ -35,6 +35,10 @@ class Gramatica:
         self.simbolo_inicial = simbolo_inicial
 
     # Métodos Mágicos
+    def __or__(self, value: "Gramatica") -> "Gramatica":
+        alfabeto = self.alfabeto | value.alfabeto
+        vocabulario = self.vocabulario | value.vocabulario
+        return Gramatica(vocabulario, alfabeto, self.sintaxe, self.simbolo_inicial)
 
     def __str__(self) -> str:
         return f"G = ({self.vocabulario}, {self.alfabeto}, {self.sintaxe}, S = {self.simbolo_inicial} )"

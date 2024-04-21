@@ -1,5 +1,5 @@
 from collections import abc
-from typing import Generator, Iterable
+from typing import AbstractSet, Generator, Iterable
 
 
 class Alfabeto(set):
@@ -103,3 +103,6 @@ class Alfabeto(set):
 
     def __str__(self) -> str:
         return f"Σ = {self.simbolos_ordenados}"
+
+    def __or__(self, value: "Alfabeto") -> "Alfabeto":
+        return Alfabeto(super().__or__(value))

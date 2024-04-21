@@ -1,10 +1,22 @@
-from collections import abc
 from typing import Iterable
+
+from multipledispatch import dispatch
 
 from classes.alfabeto import Alfabeto
 
 
 class Vocabulario(set):
+    @dispatch(set)
+    def __init__(self, vocabulario: set) -> None:
+        """
+        Inicia um Vocabulário a partir de um conjunto
+
+        Args:
+            vocabulario (set): Conjunto
+        """
+        super().__init__(vocabulario)
+
+    @dispatch(object, Alfabeto)
     def __init__(self, simbolos_n_terminais: Iterable, alfabeto: Alfabeto) -> None:
         """
         Inicia um Vocabulário
@@ -30,3 +42,6 @@ class Vocabulario(set):
 
     def __str__(self) -> str:
         return f"V = {sorted(self)}"
+
+    def __or__(self, value: "Vocabulario") -> "Vocabulario":
+        return Vocabulario(super().__or__(value))

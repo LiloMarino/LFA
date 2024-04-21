@@ -1,7 +1,9 @@
+from collections.abc import Hashable
+
 from classes.alfabeto import Alfabeto
 
 
-class Palavra:
+class Palavra(Hashable):
     def __init__(self, alfabeto: Alfabeto, palavra: str = "") -> None:
         """
         Inicia uma Palavra
@@ -32,7 +34,7 @@ class Palavra:
                 raise ValueError(
                     "Os alfabetos das palavras devem ser iguais para a adição."
                 )
-        elif not isinstance(other, Palavra) and isinstance(other, str):
+        elif isinstance(other, str):
             return Palavra(self.alfabeto, self.palavra + other)
         else:
             raise TypeError("Só é permitido a concatenação entre palavras e símbolos!")
@@ -57,6 +59,9 @@ class Palavra:
         else:
             return False
 
+    def __hash__(self) -> int:
+        return hash(self.palavra)
+
     def __str__(self) -> str:
         if len(self.palavra) == 0:
             return "'λ'"
@@ -64,6 +69,4 @@ class Palavra:
             return f"'{self.palavra}'"
 
     def __repr__(self) -> str:
-        return (
-            f"Palavra(palavra = '{self.palavra}', alfabeto = {self.alfabeto.simbolos})"
-        )
+        return str(self)
