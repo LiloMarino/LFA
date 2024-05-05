@@ -37,11 +37,10 @@ class Alfabeto(set):
         Yields:
             Palavra: Retorna a próxima cadeia do fechamento
         """
-        from classes.palavra import Palavra
 
         def generate_depth(n: int):
             # Gera todas as palavras de tamanho 'n'
-            def generate_character(posicao: int, palavra: Palavra = Palavra(self)):
+            def generate_character(posicao: int, palavra: str = ""):
                 # Gera o caractere na posição da cadeia
                 if posicao == 0:
                     yield palavra
@@ -73,11 +72,10 @@ class Alfabeto(set):
         Yields:
             Palavra: Retorna a próxima cadeia do fechamento
         """
-        from classes.palavra import Palavra
 
         def generate_depth(n: int):
             # Gera todas as palavras de tamanho 'n'
-            def generate_character(posicao: int, palavra: Palavra = Palavra(self)):
+            def generate_character(posicao: int, palavra: str = ""):
                 # Gera o caractere na posição da cadeia
                 if posicao == 0:
                     yield palavra
